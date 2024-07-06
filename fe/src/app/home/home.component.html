@@ -1,0 +1,25 @@
+<div class="home">
+  <div class="card-container" *ngFor="let card of cards">
+    <mat-card style="display:flex; align-items: center; width: 300px; height:300px; padding: 15px;">
+      <mat-card-header style="padding: 10px">
+        <mat-card-title>{{ card.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="text-align: center;">
+        <p>{{ card.description }}</p>
+        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+          <div *ngFor="let sublink of card.sublinks" style="width: 100%;">
+            <a [href]="sublink.link">{{ sublink.title }}</a>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <ng-container *ngIf="card.route">
+          <a mat-line [routerLink]="card.route">{{ card.action }}</a>
+        </ng-container>
+        <ng-container *ngIf="!card.route">
+          <a mat-line [href]="card.url" target="_blank">{{ card.action }}</a>
+        </ng-container>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <a mat-button routerLink="/"> {{ title }} </a>
+  <a mat-button routerLink="questionnaire"> Questionnaire </a>
+  <a mat-button routerLink="questionnaire-nested"> Questionnaire Nested </a>
+  <a mat-button href="https://github.com/dwaynewyj" target="_blank"> GitHub </a>
+  <span class="spacer"></span>
+</mat-toolbar>
+<mat-divider></mat-divider>
+<section class="content">
+  <router-outlet></router-outlet>
+</section>

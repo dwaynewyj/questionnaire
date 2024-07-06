@@ -1,0 +1,10 @@
+<h2 mat-dialog-title class="dialog-title">Questionnaire Summary</h2>
+<mat-dialog-content>
+    <div *ngFor="let item of data.items" class="dialog-container">
+        <h4 class="question">{{ item.text }}</h4>
+        <p class="answer">Answer: <span class="answer-text">{{ item.answer }}</span></p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="dialog-action">
+    <button mat-button [mat-dialog-close]="true">Close</button>
+</mat-dialog-actions>

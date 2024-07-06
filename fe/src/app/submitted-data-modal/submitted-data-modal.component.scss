@@ -1,0 +1,34 @@
+h2,
+h4,
+p {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.dialog-action {
+    justify-content: center;
+    font-family: Poppins !important;
+}
+
+.dialog-title {
+    justify-content: center;
+}
+
+.dialog-container {
+    margin-bottom: 15px;
+
+    .question {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .answer {
+        font-size: 10px;
+    }
+
+    .answer-text {
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+}

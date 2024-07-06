@@ -1,0 +1,61 @@
+<div *ngIf="questionnaire" class="questionnaire-container">
+    <h2>Questionnaire Nested</h2>
+    <div>
+        <p><strong>Subject Type:</strong> {{ subjectType.join(', ') }}</p>
+        <p><strong>Status:</strong> {{ status }}</p>
+    </div>
+    <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()" class="form">
+        <ng-container *ngFor="let question of questionItems" class="form-field">
+            <ng-container *ngIf="question.type === 'group'">
+                <div class="group-container">
+                    <h3>{{ question.text }}</h3>
+                    <ng-container *ngFor="let nestedQuestion of question.item" class="form-field">
+                        <mat-form-field *ngIf="nestedQuestion.type !== 'boolean'" appearance="fill" class="form-field">
+                            <mat-label class="question-label">{{ nestedQuestion.text }}</mat-label>
+                            <ng-container [ngSwitch]="nestedQuestion.type">
+
+                                <!-- For choice questions -->
+                                <mat-select *ngSwitchCase="'choice'" [formControlName]="nestedQuestion.linkId">
+                                    <mat-option *ngFor="let option of nestedQuestion.option"
+                                        [value]="option.valueCoding.code">
+                                        {{ option.valueCoding.display }}
+                                    </mat-option>
+                                </mat-select>
+
+                                <!-- For date questions -->
+                                <div *ngSwitchCase="'date'" class="date-field">
+                                    <input matInput [formControlName]="nestedQuestion.linkId" [matDatepicker]="picker"
+                                        placeholder="Choose a date">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </div>
+
+                                <!-- For string questions -->
+                                <input matInput *ngSwitchDefault [formControlName]="nestedQuestion.linkId" type="text">
+                            </ng-container>
+                        </mat-form-field>
+
+                        <!-- For boolean questions -->
+                        <div *ngIf="nestedQuestion.type === 'boolean'" class="boolean-field">
+                            <mat-label class="question-label">{{ nestedQuestion.text }}</mat-label>
+                            <mat-radio-group [formControlName]="nestedQuestion.linkId">
+                                <mat-radio-button [value]="true">Yes</mat-radio-button>
+                                <mat-radio-button [value]="false">No</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </ng-container>
+                </div>
+            </ng-container>
+
+            <!-- For top-level boolean questions -->
+            <div *ngIf="question.type === 'boolean'" class="boolean-field">
+                <mat-label class="question-label">{{ question.text }}</mat-label>
+                <mat-radio-group [formControlName]="question.linkId">
+                    <mat-radio-button [value]="true">Yes</mat-radio-button>
+                    <mat-radio-button [value]="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </ng-container>
+        <button mat-raised-button type="submit" class="submit-button" [disabled]="isSubmitDisabled()">Submit</button>
+    </form>
+</div>
