@@ -83,30 +83,22 @@ export class QuestionnaireNestedComponent implements OnInit {
 
   generateFormControls(): void {
     const group: { [key: string]: any } = {};
-
     this.questionItems.forEach(question => {
       if (question.item && question.type === 'group') {
         question.item.forEach(nestedQuestion => {
           const validators: any[] = [];
-
-          // Add validators if necessary (example: required for certain types)
           if (nestedQuestion.type === 'boolean' || nestedQuestion.type === 'choice') {
             validators.push();
           } else if (nestedQuestion.type === 'date') {
-            // Date validator to ensure the value is a valid date
             validators.push(this.dateValidator);
           }
-
           group[nestedQuestion.linkId] = ['', validators];
         });
       } else {
         const validators: any[] = [];
-
-        // Add validators if necessary (example: required for certain types)
         if (question.type === 'boolean' || question.type === 'choice') {
           validators.push();
         } else if (question.type === 'date') {
-          // Date validator to ensure the value is a valid date
           validators.push(this.dateValidator);
         }
 

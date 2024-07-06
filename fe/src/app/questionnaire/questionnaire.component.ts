@@ -81,27 +81,18 @@ export class QuestionnaireComponent implements OnInit {
 
   generateFormControls(): void {
     const group: { [key: string]: any } = {};
-
     this.questionItems.forEach(question => {
       const validators: any[] = [];
-
-      // Add validators if necessary (example: required for certain types)
-      // Add validators if necessary (example: required for certain types)
       if (question.type === 'boolean' || question.type === 'choice') {
         validators.push();
       } else if (question.type === 'date') {
-        // Date validator to ensure the value is a valid date
         validators.push(this.dateValidator);
       }
-
       group[question.linkId] = ['', validators];
     });
-
     this.questionnaireForm = this.fb.group(group);
   }
 
-
-  // Custom date validator
   dateValidator(control: any) {
     const inputDate = new Date(control.value);
     return isNaN(inputDate.getTime()) ? { 'matDatepickerParse': true } : null;
@@ -124,14 +115,10 @@ export class QuestionnaireComponent implements OnInit {
 
   generateAnswersJson(submittedAnswers: any, items: Question[]): any[] {
     const generatedJson: any[] = [];
-
     const submitTime = new Date();
-    // Iterate through each item in the items array
     items.forEach(item => {
       const linkId = item.linkId;
       const answer = submittedAnswers[linkId];
-
-      // Create a new object for the item with the answer
       const newItem = {
         linkId: item.linkId,
         text: item.text,
