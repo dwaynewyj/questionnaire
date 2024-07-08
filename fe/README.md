@@ -1,27 +1,29 @@
-# Fe
+# Smile Digital Health Coding Assignment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
+This project contains instructions for the FE coding assignment.
 
-## Development server
+### Getting Started:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* [ ] Take a few minutes to familiarize yourself with the [FHIR Standard](http://hl7.org/fhir/) for health data exchange. In particular, you might want to read the [Executive Summary](http://hl7.org/fhir/summary.html) and the [Developer Introduction](http://hl7.org/fhir/overview-dev.html)
 
-## Code scaffolding
+* [ ] The use of the Angular framework is highly recommended
+  
+* [ ] Create your own GitHub project and copy the contents of this repository into your own project.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* [ ] **Please, do not fork this repo.** Create your own private GitHub repository to do your work in.
 
-## Build
+### Task:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* [ ] Generate a questionnaire view. In the view, _dynamically_ generate a form and capture the answer for the following questions. Use the [`questionnaire.json`](assets/questionnaire.json) to validate the behavior.
 
-## Running unit tests
+    -    Do you have allergies? **Radio Button (True, False)**
+    -    What is your gender? **Select (Male, Female, Other)**
+    -    What is your date of birth? **Datepicker**
+    -    What is your country of birth? **Textbox**
+    -    What is your marital status? **Select (Married, Single, Divorced)**
+    -    Do you smoke? **Radio Button (True, False)**
+    -    Do you drink alchohol? **Radio Button (True, False)**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* [ ] Add a submit button that displays the entered results of the form. 
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* [ ] Commit your work.
