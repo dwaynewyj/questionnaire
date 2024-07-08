@@ -67,7 +67,7 @@ This project is designed to complete the front-end coding assignment for Smile D
 
 ## Architectural Overview
 
-The architecture of the Angular-React Dashboard is as follows:
+The architecture of the questionnaire application is as follows:
 
 - **Angular**: Angular is used as the main framework for the application. It provides the structure for the application, including components, services, and routing. Angular's component-based architecture allows for a clear separation of concerns and reusability.
   
