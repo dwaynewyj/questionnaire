@@ -17,29 +17,23 @@ span {
         align-items: stretch;
         width: 100%;
         gap: 10px;
-
         .question-label {
             font-size: 16px;
         }
-
         .form-field {
             margin-bottom: 20px;
             width: 100%;
-
             mat-form-field {
                 width: 100%;
             }
-
             .date-field {
                 width: 100%;
-
                 input {
                     width: calc(100% - 48px);
                     /* Adjust for datepicker toggle width */
                 }
             }
         }
-
         .submit-button {
             width: 200px;
             align-self: center;
