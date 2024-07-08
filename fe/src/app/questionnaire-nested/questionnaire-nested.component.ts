@@ -41,12 +41,10 @@ import { QuestionnaireNestedService } from './questionnaire-nested.service';
   styleUrls: ['./questionnaire-nested.component.scss']
 })
 
-
 export class QuestionnaireNestedComponent implements OnInit {
   questionnaireForm!: FormGroup;
   questionnaire!: QuestionnaireNested;
   questionItems!: QuestionNested[];
-
   subjectType: string[] = [];
   status: string = '';
   submittedFormData: any;
@@ -101,7 +99,6 @@ export class QuestionnaireNestedComponent implements OnInit {
         } else if (question.type === 'date') {
           validators.push(this.dateValidator);
         }
-
         group[question.linkId] = ['', validators];
       }
     });
@@ -130,12 +127,10 @@ export class QuestionnaireNestedComponent implements OnInit {
 
   generateAnswersJson(submittedAnswers: any, items: QuestionNested[]): any[] {
     const generatedJson: any[] = [];
-
     const submitTime = new Date();
     items.forEach(item => {
       const linkId = item.linkId;
       const answer = submittedAnswers[linkId];
-
       if (item?.item && item.type === 'group') {
         item?.item.forEach(nestedQuestion => {
           const nestedAnswer = submittedAnswers[nestedQuestion.linkId];
@@ -160,7 +155,6 @@ export class QuestionnaireNestedComponent implements OnInit {
         generatedJson.push(newItem);
       }
     });
-
     return generatedJson;
   }
 
