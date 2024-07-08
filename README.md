@@ -8,7 +8,7 @@ This project is designed to complete the front-end coding assignment for Smile D
 - Author: Dwayne Jang
 - Created: 202407051800
 - Updated: 202407052125
-- 
+  
 ## Features
 
 - **Responsive Layout**: Ensures seamless usability across various devices, adapting fluidly to different screen sizes.
