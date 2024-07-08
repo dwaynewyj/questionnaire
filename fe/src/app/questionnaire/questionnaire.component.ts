@@ -12,7 +12,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
-
 import { SubmittedDataModalComponent } from '../submitted-data-modal/submitted-data-modal.component';
 import { Question, Questionnaire } from './questionnaire.interface';
 import { QuestionnaireService } from './questionnaire.service';
@@ -44,7 +43,6 @@ export class QuestionnaireComponent implements OnInit {
   questionnaireForm!: FormGroup;
   questionnaire!: Questionnaire;
   questionItems!: Question[];
-
   subjectType: string[] = [];
   status: string = '';
   submittedFormData: any;
@@ -103,7 +101,6 @@ export class QuestionnaireComponent implements OnInit {
       const formData = this.questionnaireForm.value;
       this.submittedFormData = this.generateAnswersJson(formData, this.questionItems);
       this.openSubmittedDataModal(this.submittedFormData);
-
     } else {
       console.log('Form is invalid.');
     }
