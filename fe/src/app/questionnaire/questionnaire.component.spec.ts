@@ -136,12 +136,12 @@ describe('QuestionnaireComponent', () => {
   });
 
   it('should check if submit button is disabled', () => {
-    component.questionnaireForm.patchValue({
+    component.ngOnInit();
+    component.questionnaireForm = new FormBuilder().group({
       '1': true,
       '2': 'male',
       '3': new Date('1990-01-01')
     });
-
     expect(component.isSubmitDisabled()).toBeFalse();
 
     component.questionnaireForm.patchValue({
@@ -152,4 +152,36 @@ describe('QuestionnaireComponent', () => {
 
     expect(component.isSubmitDisabled()).toBeFalse();
   });
+
+  describe('dateValidator funciton', () => {
+    it('should return null when control value is null', () => {
+      let mockInput = { value: null };
+      let result = component.dateValidator(mockInput);
+      expect(result).toBeNull();
+    });
+
+    it('should return null when control value is undefined', () => {
+      let mockInput = { value: undefined };
+      let result = component.dateValidator(mockInput);
+      expect(result).toBeNull();
+    });
+
+    it('should throw exception when control value is not a date', () => {
+      let mockInput = { value: "test" };
+      let result = component.dateValidator(mockInput);
+      expect(result).toEqual(jasmine.objectContaining({ 'matDatepickerParse': true }));
+    });
+
+    it('should return null when control value is a date string', () => {
+      let mockInput = { value: "2024/07/11" };
+      let result = component.dateValidator(mockInput);
+      expect(result).toBeNull();
+    });
+
+    it('should return null when control value is a date string', () => {
+      let mockInput = { value: "2024-07-11" };
+      let result = component.dateValidator(mockInput);
+      expect(result).toBeNull();
+    });
+  })
 });

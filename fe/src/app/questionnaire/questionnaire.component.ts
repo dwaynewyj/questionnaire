@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
+
 import { SubmittedDataModalComponent } from '../submitted-data-modal/submitted-data-modal.component';
 import { Question, Questionnaire } from './questionnaire.interface';
 import { QuestionnaireService } from './questionnaire.service';
@@ -81,8 +82,10 @@ export class QuestionnaireComponent implements OnInit {
     const group: { [key: string]: any } = {};
     this.questionItems.forEach(question => {
       const validators: any[] = [];
-      if (question.type === 'boolean' || question.type === 'choice') {
-        validators.push();
+      if (question.type === 'boolean') {
+        validators.push(this.booleanValidator);
+      } else if (question.type === 'choice' && question.item) {
+        validators.push(this.choicesValidator(question.item));
       } else if (question.type === 'date') {
         validators.push(this.dateValidator);
       }
@@ -91,9 +94,37 @@ export class QuestionnaireComponent implements OnInit {
     this.questionnaireForm = this.fb.group(group);
   }
 
+  choicesValidator(choices: Question[]): ValidatorFn {
+    return (control) => {
+      const value = control.value;
+      if (choices.includes(value)) {
+        return null;
+      } else {
+        return { invalidChoice: true };
+      }
+    };
+  }
+
+  booleanValidator: ValidatorFn = (control) => {
+    const value = control.value;
+    if (value === true || value === false) {
+      return null;
+    } else {
+      return { invalidBoolean: true };
+    }
+  };
+
+
   dateValidator(control: any) {
-    const inputDate = new Date(control.value);
-    return isNaN(inputDate.getTime()) ? { 'matDatepickerParse': true } : null;
+    if (!control || !control?.value) {
+      return null;
+    }
+    try {
+      const inputDate = new Date(control.value);
+      return isNaN(inputDate.getTime()) ? { 'matDatepickerParse': true } : null;
+    } catch {
+      return null;
+    }
   }
 
   onSubmit(): void {
